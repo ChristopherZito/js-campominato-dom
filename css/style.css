@@ -1,0 +1,101 @@
+/* generali */
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    background-color: rgb(59, 0, 69);
+    height: 100vh;
+    padding-top: 20px;
+}
+
+#difficulty{
+    width: 15%;
+    margin: auto;
+    background-color: grey;
+    border-radius: 15px;
+}
+.btn{
+    background-color: lime;
+    padding: 4px 5px;
+    border-radius: 25px;
+    margin: 10px;
+}
+
+/* container livelli */
+#cont-easy{
+    width: 40%;
+    height: 80vh;
+    margin: 10px auto;
+    background-color: limegreen;
+    display: flex;
+    flex-wrap: wrap;
+    display: none;
+}
+
+#cont-medium{
+    width: 40%;
+    height: 80vh;
+    margin: 10px auto;
+    background-color: yellow;
+    display: flex;
+    flex-wrap: wrap;
+    display: none;
+}
+
+#cont-hard{
+    width: 40%;
+    height: 80vh;
+    margin: 10px auto;
+    background-color: red;
+    display: flex;
+    flex-wrap: wrap;
+    display: none;
+}
+
+#cont-easy .cell {
+    width: calc(100% / 10);
+}
+
+#cont-medium .cell {
+    width: calc(100% / 9);
+}
+
+#cont-hard .cell {
+    width: calc(100% / 7);
+}
+
+.levelSelected{
+    display: flex !important;
+}
+.levelNull{
+    display: none !important;
+}
+/* celle di gioco */
+.cell{
+    background-color: black;
+    border: 3px  solid white;
+    text-align: center;
+    padding-top: 20px;
+    color: transparent;
+}
+
+.cell.clicked{
+    background-color: blue;
+    color: white;
+}
+
+.cell:hover{
+    cursor: pointer;
+}
+
+
+/* bomba */
+.bomb{
+    background-color: red;
+    color: white;
+}
+
