@@ -94,7 +94,11 @@
 
 
 /* bomba */
-.bomb{
+/* .bomb{
+    background-color: red;
+    color: white;
+} */
+.bombhit{
     background-color: red;
     color: white;
 }

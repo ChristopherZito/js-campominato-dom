@@ -21,6 +21,7 @@ const livEasy = document.getElementById("easy");
 const livMedium = document.getElementById("medium");
 const livHard = document.getElementById("hard");
 
+
 //cambio della schermata in base al livello
 //livello easy
 livEasy.addEventListener("click",
@@ -31,6 +32,10 @@ livEasy.addEventListener("click",
         medium.classList.add("levelNull")
         hard.classList.remove("levelSelected")
         hard.classList.add("levelNull") 
+
+
+        //RESET DEL LIVELLO
+        // cell.classList.remove("clicked");
     }
 );
 //livello medium
@@ -42,6 +47,10 @@ livMedium.addEventListener("click",
         hard.classList.add("levelNull")
         easy.classList.remove("levelSelected")
         easy.classList.add("levelNull") 
+
+
+        //RESET DEL LIVELLO
+        // cell.classList.remove("clicked");
     }
 );
 //livello hard
@@ -53,39 +62,65 @@ livHard.addEventListener("click",
         medium.classList.add("levelNull")
         easy.classList.remove("levelSelected")
         easy.classList.add("levelNull")
+
+
+        //RESET DEL LIVELLO
+        // cell.classList.remove("clicked");
     }
 );
+//generare array con i numeri bomba
+let bombeasy = [];
+let bombmedium = [];
+let bombhard = [];
+//generare un array con i numeri bomba
+bombeasy = bombnumgenerator(100);
+console.log("numeri bomba generati in easy: " + bombeasy);
 
+//generare un array con i numeri bomba
+bombmedium = bombnumgenerator(81);
+console.log("numeri bomba generati in medium: " + bombmedium);
+
+//generare un array con i numeri bomba
+bombhard = bombnumgenerator(49);
+console.log("numeri bomba generati in hard: " + bombhard);
+
+
+let cellOut;
 //generazione celle nel container EASY
 for(let i = 1; i <= 100; i++){
-    let cellOut = cellgenerator();
+    cellOut = cellgenerator();
     easy.append(cellOut);
-    cellOut.append(i)
-    /* let bomb = bombnumgenerator(100);
-    console.log("i numeri bomba saranno in easy: " + bomb);
-    if( i = bomb){
-        cell.classList.add("cell")
-    } */
-};
-        
+    cellOut.append(i) ;
+    //classificare i numeri bomba 
+    let verificaBomba = bombeasy.includes(i);
+    if(verificaBomba == true){
+        cellOut.classList.add("bomb")
+    };
+}
+
 //generazione celle nel container MEDIUM
 for(let i = 1; i <= 81; i++){
-    let cellOut = cellgenerator();
+    cellOut = cellgenerator();
     medium.append(cellOut);
     cellOut.append(i); 
-    /* let bomb = bombnumgenerator(81);
-    console.log("i numeri bomba saranno in medium: " + bomb); */
+   //classificare i numeri bomba 
+   let verificaBomba = bombmedium.includes(i)
+   if(verificaBomba == true){
+       cellOut.classList.add("bomb")
+   }
 };
 
 //generazione celle nel container HARD
 for(let i = 1; i <= 49; i++){
-    let cellOut = cellgenerator();
+    cellOut = cellgenerator();
     hard.append(cellOut);
-    cellOut.append(i); 
-   /*  let bomb = bombnumgenerator(49);
-    console.log("i numeri bomba saranno in hard: " + bomb); */
+    cellOut.append(i);   
+    //classificare i numeri bomba 
+    let verificaBomba = bombhard.includes(i)
+    if(verificaBomba == true){
+        cellOut.classList.add("bomb")
+    }
 };
-
 
 
 //funzioni
@@ -111,7 +146,7 @@ function bombnumgenerator(livello){
     while(bomba.length < 16){
         //generazione numero
         const numBomba = Math.floor(Math.random() * livello) + 1;
-        console.log("numero generato = " + numBomba);
+        // console.log("numero generato = " + numBomba);
         //verifica con .includes
         let verifica = bomba.includes(numBomba)
         //push all'array
