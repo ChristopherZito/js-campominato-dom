@@ -15,12 +15,12 @@
 const easy = document.getElementById("cont-easy");
 const medium = document.getElementById("cont-medium");
 const hard = document.getElementById("cont-hard");
+const lose = document.getElementById("containerloser");
 
 //input livelli
 const livEasy = document.getElementById("easy");
 const livMedium = document.getElementById("medium");
 const livHard = document.getElementById("hard");
-
 
 //cambio della schermata in base al livello
 //livello easy
@@ -33,9 +33,10 @@ livEasy.addEventListener("click",
         hard.classList.remove("levelSelected")
         hard.classList.add("levelNull") 
 
+        lose.style.display = "none";
 
-        //RESET DEL LIVELLO
-        // cell.classList.remove("clicked");
+        console.log("reset punteggio");
+        point = 0
     }
 );
 //livello medium
@@ -46,11 +47,12 @@ livMedium.addEventListener("click",
         hard.classList.remove("levelSelected")
         hard.classList.add("levelNull")
         easy.classList.remove("levelSelected")
-        easy.classList.add("levelNull") 
+        easy.classList.add("levelNull")
 
-
-        //RESET DEL LIVELLO
-        // cell.classList.remove("clicked");
+        lose.style.display = "none";
+        
+        console.log("reset punteggio");
+        point = 0
     }
 );
 //livello hard
@@ -62,12 +64,17 @@ livHard.addEventListener("click",
         medium.classList.add("levelNull")
         easy.classList.remove("levelSelected")
         easy.classList.add("levelNull")
+        
+        lose.style.display = "none";
 
-
-        //RESET DEL LIVELLO
-        // cell.classList.remove("clicked");
+        console.log("reset punteggio");
+        point = 0
     }
 );
+
+//punteggio
+let point = 0;
+
 //generare array con i numeri bomba
 let bombeasy = [];
 let bombmedium = [];
@@ -91,11 +98,27 @@ for(let i = 1; i <= 100; i++){
     cellOut = cellgenerator();
     easy.append(cellOut);
     cellOut.append(i) ;
-    //classificare i numeri bomba 
-    let verificaBomba = bombeasy.includes(i);
-    if(verificaBomba == true){
-        cellOut.classList.add("bomb")
-    };
+    //selezionamento celle
+    cellOut.addEventListener("click",
+    function(){
+        this.classList.add("clicked");
+        point++
+        console.log(("hai fatto punto in easy, sei a: " + point));
+        //classificare i numeri bomba 
+        let verificaBomba = bombeasy.includes(i);
+        if(verificaBomba == true){
+            this.classList.add("bombhit")
+            console.log("BOOM, peccato hai perso, punteggio finale: " + point);    
+            
+            /* bombeasy[i].classList.add("bombhit") */
+            
+            lose.style.display = "block";
+        };
+        }
+    )
+    if(point == 84){
+        console.log("HAI VINTO, ce culo");
+    }
 }
 
 //generazione celle nel container MEDIUM
@@ -103,24 +126,49 @@ for(let i = 1; i <= 81; i++){
     cellOut = cellgenerator();
     medium.append(cellOut);
     cellOut.append(i); 
-   //classificare i numeri bomba 
-   let verificaBomba = bombmedium.includes(i)
-   if(verificaBomba == true){
-       cellOut.classList.add("bomb")
-   }
+    //selezionamento celle
+    cellOut.addEventListener("click",
+    function(){
+        this.classList.add("clicked");
+        point++
+        console.log(("hai fatto punto in medium, sei a: " + point));
+        //classificare i numeri bomba 
+        let verificaBomba = bombmedium.includes(i);
+        if(verificaBomba == true){
+            this.classList.add("bombhit")
+            console.log("BOOM, peccato hai perso, punteggio finale: " + point);      
+        };
+        }
+    )
+    if(point == 65){
+        console.log("HAI VINTO, ce culo");
+    }
 };
 
 //generazione celle nel container HARD
 for(let i = 1; i <= 49; i++){
     cellOut = cellgenerator();
     hard.append(cellOut);
-    cellOut.append(i);   
-    //classificare i numeri bomba 
-    let verificaBomba = bombhard.includes(i)
-    if(verificaBomba == true){
-        cellOut.classList.add("bomb")
+    cellOut.append(i);  
+    //selezionamento celle
+    cellOut.addEventListener("click",
+    function(){
+        this.classList.add("clicked");
+        point++
+        console.log(("hai fatto punto in hard, sei a: " + point));
+        //classificare i numeri bomba 
+        let verificaBomba = bombhard.includes(i);
+        if(verificaBomba == true){
+            this.classList.add("bombhit")
+            console.log("BOOM, peccato hai perso, punteggio finale: " + point);       
+        };
+        }
+    )
+    if(point == 33){
+        console.log("HAI VINTO, ce culo");
     }
 };
+
 
 
 //funzioni
@@ -128,12 +176,6 @@ for(let i = 1; i <= 49; i++){
 function cellgenerator(){
     let cell = document.createElement("div")
     cell.classList.add("cell")
-    //selezionamento celle
-    cell.addEventListener("click",
-    function(){
-        cell.classList.add("clicked");
-        }
-    )
     return cell;
 }
 
@@ -153,7 +195,6 @@ function bombnumgenerator(livello){
         if(verifica == false){
             bomba.push(numBomba);
         }
-    }
-   
+    } 
     return bomba;
 }

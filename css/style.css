@@ -94,12 +94,26 @@
 
 
 /* bomba */
-/* .bomb{
-    background-color: red;
+.bomb{
+   /*  background-color: red; */
     color: white;
-} */
+}
+
 .bombhit{
-    background-color: red;
+    background-color: red !important;
+    color: white !important;
+}
+
+/* lose */
+#containerloser{
+    width: 100%;
+    height: 85vh;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    position: fixed;
+    display: none;
+    text-align: center;
+    padding-top: 20%;
     color: white;
 }
 
